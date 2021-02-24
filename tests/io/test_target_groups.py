@@ -154,5 +154,43 @@ def test_targetgroups_edit(api, targetgroup):
     assert mod['members'] == ', '.join(members)
 
 @pytest.mark.vcr()
+def test_targetgroups_edit_acls(api, targetgroup, user):
+    user_details = user
+    members = targetgroup['members'].split(',')
+    members.append('192.168.0.2')
+    mod = api.target_groups.edit(targetgroup['id'], members=members,
+                                 acls=[{"id": user_details['id'],
+                                        "name": user_details['username'],
+                                        "permissions": user_details['permissions'],
+                                        "type": "user"
+                                        }]
+                                 )
+    assert isinstance(mod, dict)
+    t = mod
+    check(t, 'acls', list)
+    for a in t['acls']:
+        check(a, 'display_name', str, allow_none=True)
+        check(a, 'id', int, allow_none=True)
+        check(a, 'name', str, allow_none=True)
+        check(a, 'owner', int, allow_none=True)
+        check(a, 'permissions', int)
+        check(a, 'type', str)
+    check(t, 'creation_date', int)
+    check(t, 'default_group', int)
+    check(t, 'id', int)
+    check(t, 'last_modification_date', int)
+    check(t, 'members', str)
+    check(t, 'name', str)
+    check(t, 'owner', str)
+    check(t, 'owner_id', int)
+    check(t, 'shared', int)
+    check(t, 'user_permissions', int)
+    assert mod['members'] == ', '.join(members)
+    assert any(user_acls['id'] == user_details['id'] and
+                           user_acls['name'] == user_details['username'] and
+                           user_acls['permissions'] == user_details['permissions']
+                           for user_acls in mod['acls'])
+
+@pytest.mark.vcr()
 def test_targetgroups_list(api):
     assert isinstance(api.target_groups.list(), list)

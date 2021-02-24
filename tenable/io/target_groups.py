@@ -156,7 +156,9 @@ class TargetGroupsAPI(TIOEndpoint):
             'members': craw['members'],
         }
         payload = dict_merge(current, payload)
-        return self._api.put('target-groups/{}'.format(id), json=payload).json()
+        self._api.put('target-groups/{}'.format(id), json=payload).json()
+        return self._api.get('target-groups/{}'.format(
+            self._check('id', id, int))).json()
 
     def list(self):
         '''
