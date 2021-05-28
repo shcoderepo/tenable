@@ -11,6 +11,6 @@ pipeline {
 
   }
   environment {
-    Path = 'C:\\Users\\shivb\\AppData\\Local\\Microsoft\\WindowsApps'
+    Path = 'C:\\\\WINDOWS\\\\SYSTEM32'
   }
 }
