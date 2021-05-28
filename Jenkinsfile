@@ -5,8 +5,7 @@ pipeline {
       steps {
         echo '"Hello World"'
         bat(script: 'cd c:\\\\python', returnStatus: true, returnStdout: true, encoding: 'UTF-8', label: 'python')
-        bat(script: 'set "python=C:\\python\\python.exe"  "%python%" script1.py', returnStatus: true, returnStdout: true, label: 'version')
-        pybat(script: 'withPythonEnv(\'some-python-installation\') { 	// Creates the virtualenv before proceeding 	sh \'pip install nose\' }', returnStatus: true, returnStdout: true, label: 'PyenvBAr')
+        pybat(script: 'python --version', returnStatus: true, returnStdout: true, label: 'PyenvBAr')
       }
     }
 
