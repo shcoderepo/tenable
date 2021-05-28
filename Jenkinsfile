@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo '"Hello World"'
         bat(script: 'cd c:\\\\python', returnStatus: true, returnStdout: true, encoding: 'UTF-8', label: 'python')
-        pybat(script: '"c:\\python\\python.exe" "C:\\Users\\shivb\\src\\tenable\\setup.py"', returnStatus: true, returnStdout: true, label: 'calling py code ')
+        bat(script: 'python --version', returnStatus: true, returnStdout: true, label: 'version1')
       }
     }
 
