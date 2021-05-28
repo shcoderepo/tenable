@@ -4,7 +4,7 @@ pipeline {
     stage('RunPython') {
       steps {
         echo '"Hello World"'
-        bat(script: 'python --version', returnStatus: true, returnStdout: true, encoding: 'UTF-8', label: 'python')
+        bat(script: 'c:\\\\python\\\\python --version', returnStatus: true, returnStdout: true, encoding: 'UTF-8', label: 'python')
       }
     }
 
