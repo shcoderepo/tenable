@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo '"Hello World"'
         bat(script: 'cd c:\\\\python', returnStatus: true, returnStdout: true, encoding: 'UTF-8', label: 'python')
-        bat(script: '"c:\\\\python\\python.exe"  --version', returnStatus: true, returnStdout: true, label: 'version')
+        bat(script: 'set "python=C:\\python\\python.exe"  "%python%" script1.py', returnStatus: true, returnStdout: true, label: 'version')
       }
     }
 
